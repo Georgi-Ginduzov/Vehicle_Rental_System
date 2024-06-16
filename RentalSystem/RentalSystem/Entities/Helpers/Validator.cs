@@ -1,12 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 
 namespace RentalSystem.Entities.Helpers
 {
-    internal class Validator
+    public static class Validator
     {
+
+        public static bool IsValidEmail(string email)
+        {
+            string pattern = @"^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$";
+            return Regex.IsMatch(email, pattern);
+        }
+
+        public static bool IsValidPhoneNumber(string phoneNumber)
+        {
+            string universalPhoneNumberPattern = @"^\d{10}$";
+            return Regex.IsMatch(phoneNumber, universalPhoneNumberPattern);
+        }
+
+        public static bool IsValidPrice(double value)
+        {
+            if (double.IsNaN(value)
+             || double.IsInfinity(value)
+             || value <= 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
     }
 }

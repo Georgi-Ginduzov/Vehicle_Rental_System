@@ -35,7 +35,7 @@ namespace RentalSystem.Entities
             {
                 if (value == null)
                 {
-                    throw new ArgumentNullException(nameof(PhoneNumber), " cannot be null");
+                    throw new ArgumentNullException(nameof(PhoneNumber), "Phone number cannot be null");
                 }
 
                 if (!Validator.IsValidPhoneNumber(value))
@@ -53,7 +53,7 @@ namespace RentalSystem.Entities
             {
                 if (value == null)
                 {
-                    throw new ArgumentNullException(nameof(Email), " cannot be null");
+                    throw new ArgumentNullException(nameof(Email), "Email cannot be null");
                 }
 
                 if (!Validator.IsValidEmail(value))
