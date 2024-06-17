@@ -34,6 +34,12 @@ namespace RentalSystem
             rentalService.RentVehicle(customer2, triumphMotorcycle, new DateTime(2024, 6, 3), new DateTime(2024, 6, 13));
             rentalService.ReturnVehicle(customer2, triumphMotorcycle, new DateTime(2024, 6, 13));
 
+            Customer customer3 = new ("Jack", "1234567890", "jack@gmail.com", 20, 8);
+
+            rentalService.AddCustomer(customer3);
+            rentalService.RentVehicle(customer3, citroenCargoVan, new DateTime(2024, 6, 3), new DateTime(2024, 6, 18));
+            rentalService.ReturnVehicle(customer3, citroenCargoVan, new DateTime(2024, 6, 13));
+
 
 
 

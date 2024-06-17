@@ -92,16 +92,16 @@ namespace RentalSystem.Entities
             builder.AppendLine();
             builder.AppendLine($"Rental cost per day: ${dailyRentral:F2}");
 
-            if (additionalInsuranceRatePerDay != 0)
+            if (InsuranceAdditionRate != 0)
             { 
-                builder.AppendLine($"Initial insurance per day:{InsuranceRate:F2}__________");
+                builder.AppendLine($"Initial insurance per day:${(InsuranceRate / ActualRentalDays):F2}");
                 if (InsuranceAdditionRate > 0)
                 {
-                    builder.AppendLine($"Insurance addition per day: ${additionalInsuranceRatePerDay}");
+                    builder.AppendLine($"Insurance addition per day: ${insuranceRatePerDay:F2}");
                 }
                 else if (InsuranceAdditionRate < 0)
                 {
-                    builder.AppendLine($"Insurance discount per day: ${additionalInsuranceRatePerDay}");
+                    builder.AppendLine($"Insurance discount per day: ${-InsuranceAdditionRate:F2}");
                 }
 
             }

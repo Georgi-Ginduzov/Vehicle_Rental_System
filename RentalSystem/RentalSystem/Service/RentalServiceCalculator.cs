@@ -77,8 +77,8 @@ namespace RentalSystem.Service
 
             if (car.SafetyRating >= 4)
             {
-                initialInsuranceCost *= 0.9m;
                 additionalInsurance = -(initialInsuranceCost * 0.1m);
+                initialInsuranceCost *= 0.9m;
             }
             return additionalInsurance;
         }
@@ -90,8 +90,8 @@ namespace RentalSystem.Service
 
             if (customer.Age < 25)
             {
-                initialInsuranceCost *= 1.2m; 
                 additionalInsurance = initialInsuranceCost * 0.2m;
+                initialInsuranceCost *= 1.2m; 
             }
             return additionalInsurance;
         }
@@ -102,8 +102,8 @@ namespace RentalSystem.Service
             decimal additionalInsurance = 0;
             if (customer.DrivingExperience > 5)
             {
-                initialInsuranceCost *= 0.85m;
                 additionalInsurance = -(initialInsuranceCost * 0.15m);
+                initialInsuranceCost *= 0.85m;
             }
             return additionalInsurance;
         }
