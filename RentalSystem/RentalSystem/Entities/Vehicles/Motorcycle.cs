@@ -2,7 +2,7 @@
 {
     public class Motorcycle : Vehicle
     {
-        public Motorcycle(string make, string model, float valuedAt) : base(make, model, valuedAt)
+        public Motorcycle(string make, string model, decimal valuedAt) : base(make, model, valuedAt)
         {
         }
     }

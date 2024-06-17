@@ -17,11 +17,9 @@ namespace RentalSystem.Entities.Helpers
             return Regex.IsMatch(phoneNumber, universalPhoneNumberPattern);
         }
 
-        public static bool IsValidPrice(double value)
+        public static bool IsValidPrice(decimal value)
         {
-            if (double.IsNaN(value)
-             || double.IsInfinity(value)
-             || value <= 0)
+            if (value <= 0)
             {
                 return false;
             }

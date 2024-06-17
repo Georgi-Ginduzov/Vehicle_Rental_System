@@ -4,9 +4,9 @@ namespace RentalSystem.Entities.Vehicles
 {
     public abstract class Vehicle
     {
-        float valuedAt;
+        decimal valuedAt;
 
-        public Vehicle(string make, string model, float valuedAt)
+        public Vehicle(string make, string model, decimal valuedAt)
         {
             Id = Guid.NewGuid();
             Make = make;
@@ -17,7 +17,7 @@ namespace RentalSystem.Entities.Vehicles
         public Guid Id { get; private set; }
         public string Make { get; private set; }
         public string Model { get; private set; }
-        public float ValuedAt
+        public decimal ValuedAt
         {
             get => valuedAt;
             set
@@ -31,9 +31,15 @@ namespace RentalSystem.Entities.Vehicles
             }
         }
 
-        /*public void AddMaintenanceRecord(Maintenance maintenance)
+        public override bool Equals(object? obj)
         {
-            MaintenanceRecords.Add(maintenance);
-        }*/
+            return obj is Vehicle vehicle &&
+                   Id.Equals(vehicle.Id);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Id);
+        }
     }
 }

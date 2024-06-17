@@ -4,7 +4,7 @@
     {
         int safetyRating;
 
-        public Car(string make, string model, float valuedAt, int safetyRating) : base(make, model, valuedAt)
+        public Car(string make, string model, decimal valuedAt, int safetyRating) : base(make, model, valuedAt)
         {
             SafetyRating = safetyRating;
         }
