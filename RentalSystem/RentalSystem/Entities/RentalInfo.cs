@@ -71,6 +71,7 @@ namespace RentalSystem.Entities
 
         public override string ToString()
         {
+            decimal dailyRentral = TotalRental / ActualRentalDays;
             decimal insuranceRatePerDay = InsuranceRate / ActualRentalDays;
             decimal additionalInsuranceRatePerDay = InsuranceAdditionRate / ActualRentalDays;
             decimal totalInsuranceRate = insuranceRatePerDay + additionalInsuranceRatePerDay;
@@ -89,19 +90,24 @@ namespace RentalSystem.Entities
             builder.AppendLine("Actual return date: " + ActualReturnDate.ToString("yyyy-MM-dd"));
             builder.AppendLine("Actual rentral days: " + ActualRentalDays + " days");
             builder.AppendLine();
-            builder.AppendLine("Rental cost per day: $" + TotalRental / ActualRentalDays);
-            builder.AppendLine($"Initial insurance per day: ${insuranceRatePerDay}");
-            
-            if (InsuranceAdditionRate > 0)
-            {
-                builder.AppendLine($"Insurance addition per day: ${additionalInsuranceRatePerDay}");
+            builder.AppendLine($"Rental cost per day: ${dailyRentral:F2}");
+
+            if (additionalInsuranceRatePerDay != 0)
+            { 
+                builder.AppendLine($"Initial insurance per day:{InsuranceRate:F2}__________");
+                if (InsuranceAdditionRate > 0)
+                {
+                    builder.AppendLine($"Insurance addition per day: ${additionalInsuranceRatePerDay}");
+                }
+                else if (InsuranceAdditionRate < 0)
+                {
+                    builder.AppendLine($"Insurance discount per day: ${additionalInsuranceRatePerDay}");
+                }
+
             }
-            else if (InsuranceAdditionRate < 0)
-            {
-                builder.AppendLine($"Insurance discount per day: ${additionalInsuranceRatePerDay}");
-            }
-            
-            builder.AppendLine($"Insurance per day: ${(insuranceRatePerDay + additionalInsuranceRatePerDay):F2}");
+
+
+            builder.AppendLine($"Insurance per day: ${(totalInsuranceRate / 10):F2}");
             builder.AppendLine();
             builder.AppendLine($"Total rent: ${TotalRental:F2}");
             builder.AppendLine($"Total insurance: ${totalInsuranceRate:F2}");

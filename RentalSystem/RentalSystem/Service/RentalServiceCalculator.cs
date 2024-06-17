@@ -38,12 +38,11 @@ namespace RentalSystem.Service
                     break;
             }
 
-            return rentalCost;
+            return rentalCost * rentalInfo.ActualRentalDays;
         }
 
         public static decimal CalculateInsurancePrice(RentalInfo rentalInfo)
         {
-            decimal insuranceCost = 0;
             int rentalDays = rentalInfo.ActualRentalDays;
             decimal initialInsuranceCost = 0;
             decimal additionalInsuranceCost = 0;
@@ -53,27 +52,27 @@ namespace RentalSystem.Service
             switch (vehicle)
             {
                 case Car car:
-                    initialInsuranceCost = car.ValuedAt * 0.01m * rentalDays;
+                    initialInsuranceCost = ((car.ValuedAt * 0.01m) / 100) * rentalDays;
                     additionalInsuranceCost = CalculateAdditionalCarInsurance(car, rentalDays);
                     break;
                 case Motorcycle motorcycle:
-                    initialInsuranceCost = motorcycle.ValuedAt * 0.02m * rentalDays;
+                    initialInsuranceCost = ((motorcycle.ValuedAt * 0.02m) / 100) * rentalDays;
                     additionalInsuranceCost = CalculateMotorcycleAdditionalInsurance(motorcycle, customer, rentalDays);
                     break;
                 case CargoVan cargoVan:
-                    initialInsuranceCost = cargoVan.ValuedAt * 0.03m * rentalDays;
+                    initialInsuranceCost = ((cargoVan.ValuedAt * 0.03m) / 100) * rentalDays;
                     additionalInsuranceCost = CalculateCargoVanAdditionalInsurance(cargoVan, customer, rentalDays);
                     break;
             }
 
             rentalInfo.UpdateInsuranceDetails(initialInsuranceCost, additionalInsuranceCost);
 
-            return insuranceCost;
+            return initialInsuranceCost * rentalDays;
         }
 
         private static decimal CalculateAdditionalCarInsurance(Car car, int rentalDays)
         {
-            decimal initialInsuranceCost = car.ValuedAt * 0.01m * rentalDays;
+            decimal initialInsuranceCost = ((car.ValuedAt * 0.01m) / 100) * rentalDays;
             decimal additionalInsurance = 0;
 
             if (car.SafetyRating >= 4)
@@ -86,7 +85,7 @@ namespace RentalSystem.Service
 
         private static decimal CalculateMotorcycleAdditionalInsurance(Motorcycle motorcycle, Customer customer, int rentalDays)
         {
-            decimal initialInsuranceCost = motorcycle.ValuedAt * 0.02m * rentalDays;
+            decimal initialInsuranceCost = ((motorcycle.ValuedAt * 0.02m) / 100) * rentalDays;
             decimal additionalInsurance = 0; 
 
             if (customer.Age < 25)
@@ -99,7 +98,7 @@ namespace RentalSystem.Service
 
         private static decimal CalculateCargoVanAdditionalInsurance(CargoVan cargoVan, Customer customer, int rentalDays)
         {
-            decimal initialInsuranceCost = cargoVan.ValuedAt * 0.03m * rentalDays;
+            decimal initialInsuranceCost = ((cargoVan.ValuedAt * 0.03m) / 100) * rentalDays;
             decimal additionalInsurance = 0;
             if (customer.DrivingExperience > 5)
             {
