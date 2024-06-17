@@ -1,7 +1,7 @@
 ﻿using RentalSystem.Entities;
 using RentalSystem.Entities.Vehicles;
 
-namespace RentalSystem.RentalService
+namespace RentalSystem.Service
 {
     public static class RentalServiceCalculator
     {

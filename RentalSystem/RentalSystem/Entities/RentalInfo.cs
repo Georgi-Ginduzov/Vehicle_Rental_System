@@ -76,17 +76,17 @@ namespace RentalSystem.Entities
             decimal totalInsuranceRate = insuranceRatePerDay + additionalInsuranceRatePerDay;
             decimal total = TotalRental + totalInsuranceRate;
 
-            StringBuilder builder = new StringBuilder();
+            StringBuilder builder = new();
             builder.AppendLine("XXXXXXXXXX");
-            builder.AppendLine("Date: " + ActualReturnDate.ToString());
+            builder.AppendLine("Date: " + ActualReturnDate.ToString("yyyy-MM-dd"));
             builder.AppendLine("Customer Name: " + Customer.Name);
             builder.AppendLine("Rented Vehicle: " + Vehicle.Make + " " + Vehicle.Model);
             builder.AppendLine();
-            builder.AppendLine("Reservation start date: " + RentalStartDate.ToString());
-            builder.AppendLine("Reservation end date: " + PlannedReturnDate.ToString());
-            builder.AppendLine("Reserved rental days: " + PlannedRentalDays);
+            builder.AppendLine("Reservation start date: " + RentalStartDate.ToString("yyyy-MM-dd"));
+            builder.AppendLine("Reservation end date: " + PlannedReturnDate.ToString("yyyy-MM-dd"));
+            builder.AppendLine("Reserved rental days: " + PlannedRentalDays + " days");
             builder.AppendLine();
-            builder.AppendLine("Actual return date: " + ActualReturnDate.ToString());
+            builder.AppendLine("Actual return date: " + ActualReturnDate.ToString("yyyy-MM-dd"));
             builder.AppendLine("Actual rentral days: " + ActualRentalDays + " days");
             builder.AppendLine();
             builder.AppendLine("Rental cost per day: $" + TotalRental / ActualRentalDays);

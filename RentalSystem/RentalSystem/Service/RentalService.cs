@@ -1,7 +1,7 @@
 ﻿using RentalSystem.Entities;
 using RentalSystem.Entities.Vehicles;
 
-namespace RentalSystem.RentalService
+namespace RentalSystem.Service
 {
     public class RentalService
     {
@@ -80,7 +80,7 @@ namespace RentalSystem.RentalService
 
             try
             {
-                IsReturningPossible(rentalInfo, actualReturnDate);
+                _ = IsReturningPossible(rentalInfo, actualReturnDate);
             }
             catch (Exception ex)
             {
@@ -88,8 +88,13 @@ namespace RentalSystem.RentalService
                 return false;
             }
 
+            rentalInfo.ActualReturnDate = actualReturnDate;
 
+            
+            rentalInfo.TotalRental = RentalServiceCalculator.CalculateRentalPrice(rentalInfo);
+            rentalInfo.InsuranceRate = RentalServiceCalculator.CalculateInsurancePrice(rentalInfo);
 
+            Console.WriteLine(rentalInfo.ToString());
             rentalInfos.Remove(rentalInfo);
             customers.Add(customer);
             vehicles.Add(vehicle);
@@ -109,7 +114,7 @@ namespace RentalSystem.RentalService
                 throw new ArgumentOutOfRangeException(" There is no such vehicle");
             }
 
-            if (ReservationStartDate < DateTime.Now || ReservationStartDate > ReservationEndDate)
+            if (ReservationStartDate > DateTime.Now || ReservationStartDate > ReservationEndDate)
             {
                 throw new ArgumentOutOfRangeException("Reservation start date is invalid");
             }
@@ -119,16 +124,6 @@ namespace RentalSystem.RentalService
 
         private bool IsReturningPossible(RentalInfo rentalInfo, DateTime actualReturnDate)
         {
-            if (!customers.Contains(rentalInfo.Customer))
-            {
-                throw new ArgumentOutOfRangeException("There is no such customer");
-            }
-
-            if (!vehicles.Contains(rentalInfo.Vehicle))
-            {
-                throw new ArgumentOutOfRangeException("There is no such vehicle");
-            }
-
             if (actualReturnDate < rentalInfo.RentalStartDate)
             {
                 throw new ArgumentOutOfRangeException("Invalid actual return date. Cannot return");
@@ -137,10 +132,5 @@ namespace RentalSystem.RentalService
             return true;
         }
 
-        private void UpdateRentalInfo(RentalInfo rentalInfo, DateTime actualReturnDate)
-        {
-            rentalInfo.ActualReturnDate = actualReturnDate;
-            
-        }
     }
 }
